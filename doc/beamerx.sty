@@ -1,6 +1,16 @@
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{beamerx}[2017/01/31 v2.3.0, standard scientific slideshows layout for Ecole polytechnique (Palaiseau,France).]
-% The original version is hosted at https://github.com/BinetReseau/polytechnique-beamer.
+% The original version is hosted at https://github.com/BinetReseau/polytechnique-beamer/blob/master/source/beamerx.sty.
+
+
+%=======================================================================
+% Popular redefinitions/steering options:
+
+% \renewcommand{\titlegraphic}{} % Default, sets the title bkg to white.
+% \renewcommand{\titlegraphic}{  % Choose beamerxbackground.jpg as title bkg.
+%   \includegraphics[height=1.01\paperheight,keepaspectratio]{beamerxbackground}}
+%
+%=======================================================================
 
 %=======================================================================
 % Declaration des options
@@ -74,6 +84,7 @@
 % Definition des longueurs
 %=======================================================================
 \newcounter{bmrX}\newcounter{bmrY}
+\newcounter{tlogY}
 
 \newcounter{bmrW}\newcounter{bmrH}
 \setcounter{bmrW}{320}
@@ -262,6 +273,11 @@
 \definecolor{themeturquoise-altbg}{RGB}{82,170,154}
 \colorlet{themeturquoise-fg}{bleu303}
 
+\definecolor{llblue}{RGB}{0,56,148}
+\colorlet{thememyblue-bg}{llblue}
+\colorlet{thememyblue-altbg}{llblue}
+\definecolor{thememyblue-fg}{RGB}{245,211,71}
+
 %\definecolor{theme-bg}{RGB}{}
 %\definecolor{theme-altbg}{RGB}{}
 %\definecolor{theme-fg}{RGB}{}
@@ -300,7 +316,7 @@
 \newcommand{\company}[1]{%
   \renewcommand{\beamerxcompany}{-- \textbf{#1} }%
 }
-\newcommand{\beamerxfootleft}{\textbf{ÉCOLE POLYTECHNIQUE} \beamerxcompany}
+\newcommand{\beamerxfootleft}{\textbf{\polyauteursave} \beamerxcompany}
 \newcommand\resetfootline{%
   \setbeamertemplate{footline}{%
     \color{xfootcolor}%
@@ -394,6 +410,7 @@
 \def\polytitresave{}
 \def\polysoustitresave{}
 \def\polyauteursave{}
+\def\polyauteurlonguesave{}
 \def\polydatesave{\today}
 
 %---------- Mise en page
@@ -419,10 +436,16 @@
 }
 
 \let\oldauthor=\author%
-\renewcommandx\author[1]{%
+\renewcommandx\author[2][1={}]{%
     % use: \author[auteur court]{auteur}
-    \renewcommand\polyauteursave{#1}
-    \oldauthor{#1}
+    \renewcommand\polyauteurlonguesave{#2}
+    \ifthenelse{\equal{#1}{}}{%
+      \renewcommand\polyauteursave{#2}
+      \oldauthor{#2}
+    }{
+      \renewcommand\polyauteursave{#1}
+      \oldauthor[#1]{#2}
+    }
 }
 
 % \let\olddate=\date
@@ -452,28 +475,56 @@
     \end{minipage}
   }%
 }
+\def\titlegraphic{}%
+\def\titletextcolor{\color{xfgcolor}}%
+\def\includetoprowlogos{
+  \begin{minipage}[lt]{0.3\paperwidth}%
+    \hspace*{1em}%\hspace{\beamerxmargin}%
+    \includegraphics[height=0.22\paperheight]{beamerx/logo_xipp_blue_longue}%\hfill\vfill%
+  \end{minipage}
+  \hfill
+  \begin{minipage}[ct]{0.4\paperwidth}
+    \centering
+    \vspace{1em}
+    \includegraphics[height=0.22\paperheight]{beamerx/logo_llr}%\hfill\vfill%
+  \end{minipage}
+  \hfill
+  \begin{minipage}[rt]{0.3\paperwidth}
+    \hfill
+    \includegraphics[height=0.22\paperheight]{beamerx/logo_ILD_whiteonblue}
+    \hspace{\beamerxmargin}
+  \end{minipage}
+}
 \AtBeginDocument{%
   \renewcommand\maketitle{%
     \setlength{\unitlength}{\paperwidth/\thebmrW}%
     \setbeamertemplate{background canvas}{%
-      \color{white}%
+      \titletextcolor%
       \begin{picture}(\thebmrW,\thebmrH)%
-        \setcounter{bmrX}{\thebmrW/2}\setcounter{bmrY}{\thebmrH/2}%
+        \setcounter{bmrX}{\thebmrW/2}%
+        \setcounter{bmrY}{\thebmrH/2}%
         \put(\thebmrX,\thebmrY){%
           \makebox(0,0)[c]{%
-            \includegraphics[height=\paperheight,keepaspectratio]{beamerxbackground}%
+            \titlegraphic%
           }%
         }%
-        \setcounter{bmrX}{2*\thebmrTPmargin}%
-        \put(\thebmrX,\thebmrY){%
-          \makebox(0,0)[l]{%
-            \includebeamerxlogo{}%
+        % \setcounter{bmrX}{2*\thebmrTPmargin}%
+        % \put(\thebmrX,\thebmrY){%
+        %   \makebox(0,0)[l]{%
+        %     \includebeamerxlogo{}%
+        %   }%
+        % }%
+        \setcounter{bmrX}{\thebmrW/2}%
+        \setcounter{tlogY}{2*\thebmrY-\thebmrY/5 - \thebmrTPmargin}
+        \put(\thebmrX,\thetlogY){%
+          \makebox(0,0)[c]{%
+              \includetoprowlogos%
           }%
         }%
         \put(\thebmrTPmargin,\thebmrTPmargin){%
           \makebox(0,0)[lb]{%
             \begin{minipage}{.5\paperwidth}\noindent%
-              \sffamily\footnotesize\polyauteursave\hspace*{0pt}%
+              \sffamily\footnotesize\polyauteurlonguesave\hspace*{0pt}%
             \end{minipage}%
           }%
         }%
@@ -485,10 +536,11 @@
             \end{minipage}%
           }%
         }%
-        \setcounter{bmrY}{\thebmrY+1}%
+        \setcounter{bmrY}{\thebmrY-7}
+        \setcounter{bmrX}{\thebmrW/2}
         \put(\thebmrX,\thebmrY){%
-          \makebox(0,0)[rb]{%
-            \begin{minipage}{0.75\paperwidth}\noindent\flushright%
+            \makebox(0,0)[cb]{%
+            \begin{minipage}{0.75\paperwidth}\noindent\center%\flushright%
               \Large\setlength{\baselineskip}{0.7\baselineskip}%
               \sffamily\bfseries\MakeUppercaseWithNewline{\polytitresave}\hspace*{0pt}%
             \end{minipage}%
@@ -496,8 +548,8 @@
         }%
         \setcounter{bmrY}{\thebmrY+1}%
         \put(\thebmrX,\thebmrY){%
-          \makebox(0,0)[rt]{%
-            \begin{minipage}{0.75\paperwidth}\noindent\flushright%
+          \makebox(0,0)[ct]{%
+            \begin{minipage}{0.75\paperwidth}\noindent\center%\flushright%
               \setlength{\baselineskip}{0.7\baselineskip}%
               \sffamily\polysoustitresave\hspace*{0pt}%
             \end{minipage}%
@@ -518,22 +570,30 @@
 %          {title}
 %          [picture]
 \def\xsection{\@ifstar\@@xsection\@xsection}
-\newcommandx{\@xsection}[4][{2={},4=welcome}]{%
+\newcommandx{\@xsection}[4][{2={},4=noframe}]{%
   \ifthenelse{\equal{#2}{}}{%
     \section{#3}%
   }{%
     \section[#2]{#3}%
   }%
-  \xsectionframe{theme#1-bg}{theme#1-fg}{#4}{\arabic{section}}{#3}%
+  \ifthenelse{\equal{#4}{noframe}}{%
+    \colorlet{xhdcolor}{theme#1-bg}%
+    }{%
+    \xsectionframe{theme#1-bg}{theme#1-fg}{#4}{\arabic{section}}{#3}%
+    }
 }
-\newcommandx{\@@xsection}[4][{2={},4=welcome}]{%
+\newcommandx{\@@xsection}[4][{2={},4=noframe}]{%
   \ifthenelse{\equal{#2}{}}{%
     \section*{#3}%
   }{%
     \section*[#2]{#3}%
   }%
-  \addtocounter{section}{-1}
-  \xsectionframe{theme#1-bg}{theme#1-fg}{#4}{}{#3}%
+  \addtocounter{section}{-1}%
+  \ifthenelse{\equal{#4}{noframe}}{%
+    \colorlet{xhdcolor}{theme#1-bg}%
+    }{%
+    \xsectionframe{theme#1-bg}{theme#1-fg}{#4}{\arabic{section}}{#3}%
+    }
 }
 
 %- XSectionFrame
