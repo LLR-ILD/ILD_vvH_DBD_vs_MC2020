@@ -1,0 +1,146 @@
+\newcounter{finalframe}
+\setcounter{finalframe}{\value{framenumber}}
+
+\xsection*{myblue}{Back-up}[pr_ilc_cavity_resized]
+
+\begin{frame}
+  \frametitle{Two types of variables}
+  It is important to assign each observed momentum to the right parent particle.
+  \begin{columns}[c,onlytextwidth]
+  \begin{column}{0.5\textwidth}
+  \begin{block}{Higgs-only variables}
+  \begin{itemize}
+    \item E.g. $M_H^{\tn{vis}}$, recoil to $M_H^{\tn{vis}}$.
+    \item But also \textbf{number of charged hadrons}.
+    \item Differ between the Higgs decay modes.
+    \item Same distr. for all four $Z\rightarrow l \bar{l}$ samples.
+    \item Distributions taken from the \textit{reference sample}.
+  \end{itemize}
+  \end{block}
+  \end{column}
+  \begin{column}{0.5\textwidth}
+  \begin{block}{Z-only variables}
+  \begin{itemize}
+    \item E.g. $M_{\tn{recoil}}$, $M_Z$.
+    \item C.f. recoil mass technique.
+    \item Independent of the Higgs boson decay (model).
+    \item Distributions taken from Monte Carlo (MC) generated data.
+  \end{itemize}
+  \end{block}
+  \end{column}
+  \end{columns}
+  \end{frame}
+
+\begin{frame}
+  \frametitle{Two types of samples}
+  \begin{columns}[c,onlytextwidth]
+  \begin{column}{0.5\textwidth}
+  \begin{block}{Counting sample}
+  \begin{itemize}
+    \item Count the number of events in the samples.
+    \item Three samples are built:
+        $Z\rightarrow e^+ e^-$, $\tau^+ \tau^-$ and $\nu_l \bar{\nu}_l$.
+    \item Event selection based on both Z-only and Higgs-only variables.
+    \item Z-only selection efficiency from MC.
+    \item Higgs-only sel. eff. from reference sample.
+  \end{itemize}
+  \end{block}
+  \end{column}
+  \begin{column}{0.5\textwidth}
+  \begin{block}{Reference sample}
+  \begin{itemize}
+    \item Extract the fraction of events passing a (Higgs-only) selection.
+    \item Employed Higgsstrahlung events: $Z\rightarrow \mu^+ \mu^-$.
+    \item Event selection based on just the Z-only variables.
+    \item Selection efficiency from MC. \\ {\color{white} X}
+  \end{itemize}
+  \end{block}
+  \end{column}
+  \end{columns}
+  \end{frame}
+
+\begin{frame}<100>
+  \frametitle{Uncertainty on the \texorpdfstring{{$\nu\bar{\nu}H$}}{vvH} cross section}
+  \begin{align*}
+    \sigma_{\nu\bar{\nu}H} &= \frac{N_{\nu\bar{\nu}H}}{L}
+        = \frac{N_{\nu\bar{\nu}H}}
+               {BR(Z\rightarrow \nu\bar{\nu})\epsilon_Z^{\mu, e} \epsilon_H L}
+    \\
+    \frac{ \Delta\sigma_{\nu\bar{\nu}H} }{ \sigma_{\nu\bar{\nu}H} }
+    &\approx \sqrt{ \left( \frac{ \Delta N_{\nu\bar{\nu}H} }
+                                { N_{\nu\bar{\nu}H}} \right)^2
+                 +  \left( \frac{ \Delta \epsilon_H }{ \epsilon_H} \right)^2 }
+    \\
+    &= \sqrt{ \frac{ D_{\nu\bar{\nu}H} }{ (N_{\nu\bar{\nu}H})^2 }
+            + \frac{ D_{Z}^{\mu, e} }{ (N_{Z}^{\mu, e})^2 }
+            + \frac{ D_{H|Z}^{\mu, e} }{ (N_{H|Z}^{\mu, e})^2 }
+            - \frac{ 2 D_{H|Z}^{\mu, e} }{ N_{H|Z}^{\mu, e} N_{Z}^{\mu, e} } }
+    \end{align*}
+    Includes the systematic uncertainty from the selection
+    (e.g. cut on $N_{\tn{ch. hadr.}}$). \\
+    Assumption: Background distributions well known. \\
+  \end{frame}
+
+\begin{frame}<100>
+  \frametitle{The \texorpdfstring{$\nu\bar{\nu}H$}{vvH} BDT}
+  Up to now trained an XGBoost BDT with the DBD MC samples.
+  The criterium for the variables is to:
+  \begin{columns}[c,onlytextwidth]
+  \begin{column}{0.5\textwidth}
+  \begin{block}{Only use Higgs boson remnants, nothing from the recoiling Z boson}
+  \begin{itemize}
+    \item[+] $\delta\sigma_{H\nu\bar{\nu}}\approx3.1\%$ achieved so far.
+    \item N$_{\tn{charged hadrons}}$, N$_{\tn{neutral hadrons}}$, N$_\gamma$,
+        N$_e$, N$_\mu$, N$_{\tn{isolated leptons}}$.
+    \item M$_{\tn{Higgs}}$(=M$_{\tn{vis}})$, M$_{\tn{Higgs-recoil}}$,
+        cos$(\theta_{\tn{miss}})$.
+    \item principle thrust, z-component of thrust axis, major thrust,
+        minor thrust, sphericity, aplanarity,
+        E$^{\tn{max}}_{\tn{isolated lepton}}$,
+        cos$(\theta_{\tn{isolated lepton}})$.
+  \end{itemize}
+  \end{block}
+  \end{column}
+  \begin{column}{0.5\textwidth}
+  \begin{block}{and indep. of the Higgs production (WW-fusion, Higgsstrahlung).}
+  \begin{itemize}
+    \item[+] $\delta\sigma_{H\nu\bar{\nu}}\approx3.8\%$ achieved so far.
+    \item N$_{\tn{charged hadrons}}$, N$_{\tn{neutral hadrons}}$, N$_\gamma$,
+        N$_e$, N$_\mu$, N$_{\tn{isolated leptons}}$.
+    \item M$_{\tn{Higgs}}$(=M$_{\tn{vis}})$.
+    \item[]
+    \item[]
+    \item[]
+    \item[]
+  \end{itemize}
+  \end{block}
+  \end{column}
+  \end{columns}
+  \end{frame}
+
+\begin{frame}<100>
+  \frametitle{The \textbf{ILD DBD} 250~\GeV data set}
+  \begin{columns}[T,onlytextwidth]
+  \begin{column}{0.5\textwidth}
+  \begin{table}
+    \resizebox{\textwidth}{!}{
+    \InputTable{tab_mctabularUsedOppositePol.tex}
+    }
+  \end{table}
+  \end{column}
+  \begin{column}{0.5\textwidth}
+  \vspace{0.05\textheight} % To have the text stay below the logo.
+  \begin{itemize}
+    \item Large Standard Model event generation and detector simulation.
+    \begin{itemize}
+      \item[$\rightarrow$] for Detailed Baseline Design (DBD).
+    \end{itemize}
+    \item A particle flow algorithm (PandoraPFA) was run on simulated events in 2013.
+    \item Process luminosities between $\sim 20~$fb$^{-1}$ (Bhabha)
+        and 1000~fb$^{-1}$ (Higgs).
+  \end{itemize}
+  \end{column}
+  \end{columns}
+  \end{frame}
+
+\setcounter{framenumber}{\value{finalframe}}

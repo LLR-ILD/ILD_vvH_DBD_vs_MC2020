@@ -1,0 +1,40 @@
+  %%%%%%%%%%%%%%%%%%%%
+  % The outline slide
+  %%%%%%%%%%%%%%%%%%%%
+%TODO: Whole outline.
+\newcommand{\outline}{
+  % <beamer> ToC only shown in beamer mode: avoid all the ToCs for handout.
+  \begin{frame}<beamer>[noframenumbering]
+    \frametitle{Outline}
+    \begin{columns}[c,onlytextwidth]
+      \begin{column}{0.6\textwidth}
+        \tableofcontents[currentsection]
+      \end{column}
+      \begin{column}{0.4\textwidth}
+        \textbf{\color{llblue}Motivation:}\\
+        Improve the only (Higgs boson decay) model independent coupling measurement
+        that is possible: $g_{HZZ}$.
+      \end{column}
+    \end{columns}
+  \end{frame}
+}
+\newcommand{\handoutline}{
+  \begin{frame}[noframenumbering]
+  %\begin{frame}<handout>[noframenumbering]
+    \frametitle{Outline}
+    \begin{minipage}{.9\paperwidth}\noindent\center
+      \Large Inclusive Higgsstrahlung cross section measurements \\ with the new reference sample method
+    \end{minipage}
+    \vfill
+    \begin{columns}[c,onlytextwidth]
+      \begin{column}{0.4\textwidth}
+        \textbf{\color{llblue}Motivation:}\\
+        Improve the only (Higgs boson decay) model independent coupling measurement
+        that is possible: $g_{HZZ}$.
+      \end{column}
+      \begin{column}{0.5\textwidth}
+        \tableofcontents
+      \end{column}
+    \end{columns}
+  \end{frame}
+}

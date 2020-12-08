@@ -1,0 +1,61 @@
+\xsection{myblue}{Research question}
+
+\begin{frame}
+  \frametitle{$g_{HZZ}$ - What can be gained?}
+  Extracted from Higgsstrahlung events at a $\sqrt{s}=250$~\GeV.
+  \begin{columns}[c,onlytextwidth]
+  \begin{column}{0.60\textwidth}
+  \begin{itemize}
+    \item $Z \rightarrow \mu^+ \mu^-, Z \rightarrow e^+ e^-$:
+          Golden channels.\newline
+          Recoil mass method, already {\color{llblue}
+            \href{https://arxiv.org/abs/1604.07524}{studied elsewhere.}}
+    \item $Z \rightarrow \tau^+ \tau^-$:
+        Tagging on the $\tau$ is complicated.
+        \begin{itemize}
+          \item Large $\tau$ decay opening angle (low $E_\tau$).
+          \item Divers environment from the Higgs decay.
+        \end{itemize}
+    \item $Z \rightarrow \nu\bar{\nu}$:
+      \begin{itemize}
+        \item[--] Significant WW-fusion contribution in $\nu\bar{\nu}H$.
+        \item[--] Cannot tag event on $\nu$.
+        \item[+]  Only Higgs boson (and beam overlay) present in event.
+        \item[+]  $6\times$ higher cross section.
+      \end{itemize}
+  \end{itemize}
+  \end{column}
+  \begin{column}{0.40\textwidth}
+    \resizebox{\textwidth}{!}{
+      \input{sections/feynman/lepton_no_overlay.tex}
+    }
+  \end{column}
+  \end{columns}
+  \end{frame}
+
+
+\begin{frame}
+  \frametitle{\texorpdfstring{{$\nu\bar{\nu}H$}}{vvH}}
+  \begin{columns}[c,onlytextwidth]
+  \begin{column}{0.55\textwidth}
+  \begin{itemize}
+    \item $\sigma_{\nu\bar{\nu}H}$ with contributions from both Higgsstrahlung
+        and WW-fusion.
+    \item Their relative size varies with the beam polarisation.
+    \item Similar distributions for $\sqrt{s}=250~\GeV$.
+    \item Idea: Extract the combined cross section
+        ($\rightarrow$ production mode agnostic selection).
+    \item WIP: Determine the benefit of this observable for $G_{HZZ}, G_{HWW}$
+        from a global fit, including the correlations with e.g.
+        $\sigma_{\tn{WW-fusion} \rightarrow \nu\bar{\nu} b\bar{b}}$
+        (using {\color{llblue}\href{https://arxiv.org/abs/1706.02174}{SFitter}}).
+  \end{itemize}
+  \end{column}
+  \begin{column}{0.45\textwidth}
+  \includegraphics[height=0.5\textheight, width=0.8\textwidth, keepaspectratio]
+      {ext_nnH_cs_uncertainty}
+  \includegraphics[height=0.7\textheight, width=\textwidth, keepaspectratio]
+      {ext_nnH_BDT_production_agnostic}
+  \end{column}
+  \end{columns}
+  \end{frame}
