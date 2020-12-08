@@ -2,6 +2,12 @@ fig/*
 tmp/*
 sections/*
 
+**/build/*
+**/data/*
+**/lib/*
+**/pySteer/*
+**/init_ilcsoft.sh
+
 # Latex file endings.
 *.acn
 *.acr
