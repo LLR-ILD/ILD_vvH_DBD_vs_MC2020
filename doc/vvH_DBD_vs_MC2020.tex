@@ -1,7 +1,8 @@
 %\documentclass[aspectratio=169,handout]{beamer}
-\documentclass[aspectratio=169]{beamer}
+\documentclass[10pt, aspectratio=169]{beamer}
 \usepackage[french,noconfigs]{babel}
 \usepackage{beamerx}
+  \setbeamercovered{invisible}
 \usepackage{jonas}
 
 
@@ -12,19 +13,17 @@
 
 
 \title[ILD Analysis/Software Meeting]
-  {\texorpdfstring{{$\nu\bar{\nu}H$}}{vvH}: My first steps with the 2020 MC sample}
-      [Reference sample method]
+  {\texorpdfstring{{$\nu\bar{\nu}H$}}{vvH}: My first steps with\\the 2020 MC sample}
+      [vvH: DBD vs MC2020]
 \author[Jonas Kunath]{Jean-Claude Brient, \emph{Jonas Kunath} (LLR)}
 \date{09.12.2020}%{\today}
 
 \begin{document}
   \maketitle
-%  \input{sections/outline.tex}\handoutline % \outline or \handoutline.
+  \input{sections/outline.tex}\handoutline % \outline or \handoutline.
   \input{sections/research_question.tex}
+  \input{sections/expectations.tex}
+  \input{sections/sample_comparison.tex}
+  \input{sections/conclusion.tex}
   \input{sections/backup.tex}
-%   \input{tmp/sections/referenceSample.tex}
-%   \input{tmp/sections/dataset.tex}
-%   \input{tmp/sections/uncertaintyEstimation.tex}
-%   \input{tmp/sections/comparison.tex}
-%   \input{tmp/sections/backup.tex}
 \end{document}
