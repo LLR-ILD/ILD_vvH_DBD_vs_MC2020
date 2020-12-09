@@ -1,0 +1,64 @@
+<!-- This steering file was produced via a python script with pysteer 08/12/2020-19:55:47.-->
+
+<marlin>
+
+  <execute>
+    <processor name="IsolatedLeptonTaggingProcessor_000"/>
+    <processor name="MakeHiggsVariablesProcessor_001"/>
+    <processor name="OverlayRemoverTruthProcessor_002"/>
+    <processor name="MakeHiggsVariablesProcessor_003"/>
+  </execute>
+
+  <global>
+      <parameter name=LCIOInputFiles>
+        %LCIO_FILES
+      </parameter>
+      <parameter name=MaxRecordNumber> -1 </parameter>
+      <parameter name=SkipNEvents> 0 </parameter>
+      <parameter name=Verbosity options=DEBUG0-4,MESSAGE0-4,WARNING0-4,ERROR0-4,SILENT> MESSAGE </parameter>
+  </global>
+
+  <processor name="IsolatedLeptonTaggingProcessor_000" type="IsolatedLeptonTaggingProcessor">
+      <parameter name=CosConeLarge> 0.95 </parameter>
+      <parameter name=CosConeSmall> 0.98 </parameter>
+      <parameter name=CutOnTheISOElectronMVA> 0.5 </parameter>
+      <parameter name=CutOnTheISOMuonMVA> 0.7 </parameter>
+    <parameter name=DirOfISOElectronWeights> /cvmfs/ilc.desy.de/sw/x86_64_gcc49_sl6/v02-00-02/MarlinReco/v01-25/Analysis/IsolatedLeptonTagging/weights/e1e1h_gg_qqqq_250 </parameter>
+    <parameter name=DirOfISOMuonWeights> /cvmfs/ilc.desy.de/sw/x86_64_gcc49_sl6/v02-00-02/MarlinReco/v01-25/Analysis/IsolatedLeptonTagging/weights/yyxylv_yyxyyx_woYoke_500.mILD_l5_o1_v02 </parameter>
+      <parameter name=InputPandoraPFOsCollection lcioInType=LCIO::RECONSTRUCTEDPARTICLE> PandoraPFOs </parameter>
+      <parameter name=InputPrimaryVertexCollection lcioInType=LCIO::VERTEX> PrimaryVertex </parameter>
+    <parameter name=IsSelectingOneIsoLep> false </parameter>
+      <parameter name=MaxD0SigForElectron> 50. </parameter>
+      <parameter name=MaxD0SigForMuon> 5. </parameter>
+      <parameter name=MaxEOverPForElectron> 1.3 </parameter>
+      <parameter name=MaxEOverPForMuon> 0.3 </parameter>
+      <parameter name=MaxZ0SigForElectron> 5. </parameter>
+      <parameter name=MaxZ0SigForMuon> 5. </parameter>
+      <parameter name=MinEOverPForElectron> 0.5 </parameter>
+      <parameter name=MinEecalOverTotEForElectron> 0.9 </parameter>
+      <parameter name=MinEyokeForMuon> 1.2 </parameter>
+      <parameter name=MinPForElectron> 5. </parameter>
+      <parameter name=MinPForMuon> 5. </parameter>
+    <parameter name=OutputIsoLeptonsCollection> IsolatedLeptons </parameter>
+    <parameter name=OutputPFOsWithoutIsoLepCollection> PFOsNoIsoleptons </parameter>
+      <parameter name=UseYokeForMuonID> false </parameter>
+  </processor>
+
+  <processor name="MakeHiggsVariablesProcessor_001" type="MakeHiggsVariablesProcessor">
+      <parameter name=HiggsCollection lcioInType=LCIO::RECONSTRUCTEDPARTICLE> PandoraPFOs </parameter>
+      <parameter name=MCParticleCollection lcioInType=LCIO::MCPARTICLE> MCParticlesSkimmed </parameter>
+      <parameter name=OutputRootFile> higgs_variables </parameter>
+  </processor>
+
+  <processor name="OverlayRemoverTruthProcessor_002" type="OverlayRemoverTruthProcessor">
+      <parameter name=HiggsOnlyCollection lcioOutType=LCIO::RECONSTRUCTEDPARTICLE> HiggsOnly </parameter>
+      <parameter name=PfoCollection lcioInType=LCIO::RECONSTRUCTEDPARTICLE> PandoraPFOs </parameter>
+  </processor>
+
+  <processor name="MakeHiggsVariablesProcessor_003" type="MakeHiggsVariablesProcessor">
+    <parameter name=HiggsCollection> HiggsOnly </parameter>
+      <parameter name=MCParticleCollection lcioInType=LCIO::MCPARTICLE> MCParticlesSkimmed </parameter>
+    <parameter name=OutputRootFile> no_overlay_higgs_variables </parameter>
+  </processor>
+
+</marlin>
